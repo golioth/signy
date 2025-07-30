@@ -1,0 +1,21 @@
+# Copyright (c) 2025 Golioth, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+manifest:
+  version: 0.8
+
+  projects:
+    - name: zephyr
+      revision: v4.1.0
+      url: https://github.com/zephyrproject-rtos/zephyr
+      west-commands: scripts/west-commands.yml
+      import:
+        name-allowlist:
+          - zephyr
+          - cmsis
+          - hal_nordic
+          - mbedtls
+          - mcuboot
+          - segger
+          - tfm-mcuboot
+          - trusted-firmware-m

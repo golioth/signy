@@ -1,0 +1,23 @@
+# Copyright (c) 2025 Golioth, Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+source "Kconfig.zephyr"
+
+config BASE_URL
+  string "Base URL to be signed"
+  default "https://gw.golioth.dev/.u/c/main@1.0.0"
+  help
+    Base URL for which signy will generate a signed URL.
+
+config SIGNED_URL_MAX_SIZE
+  int "Max size for signed URL"
+  default 1024
+  help
+    Maximum size for signed URL.
+
+config CURRENT_UNIX_TIMESTAMP
+  int "Current Unix timestamp"
+  default 410245200
+  help
+    Unix timestamp to use as current system time.
