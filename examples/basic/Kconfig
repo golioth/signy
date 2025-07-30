@@ -1,0 +1,11 @@
+# Copyright (c) 2025 Golioth, Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+source "Kconfig.zephyr"
+
+config EXAMPLE_SIGNED_URL_MAX_SIZE
+  int "Max size for signed URL"
+  default 1024
+  help
+    Maximum size for signed URL.

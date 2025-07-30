@@ -1,0 +1,25 @@
+# Copyright (c) 2025 Golioth, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+manifest:
+  version: 0.8
+
+  projects:
+    - name: nrf
+      revision: v3.0.2
+      url: http://github.com/nrfconnect/sdk-nrf
+      import:
+        name-allowlist:
+          - nrf
+          - zephyr
+          - cmsis
+          - hal_nordic
+          - littlefs
+          - nrfxlib
+          - mbedtls
+          - mcuboot
+          - segger
+          - tfm-mcuboot
+          - oberon-psa-crypto
+          - trusted-firmware-m
+          - zcbor
