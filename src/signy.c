@@ -8,8 +8,9 @@
 #include <zephyr/kernel.h>
 #include <zephyr/posix/time.h>
 #include <zephyr/logging/log.h>
-#include <zephyr/sys/base64.h>
 #include <psa/crypto.h>
+
+#include "base64.h"
 
 LOG_MODULE_REGISTER(signy, LOG_LEVEL_DBG);
 
@@ -20,7 +21,9 @@ LOG_MODULE_REGISTER(signy, LOG_LEVEL_DBG);
 #define SIGNY_HASH_BITS 256
 
 #define SIGNY_SIG_SIZE 64
-#define SIGNY_SIG_B64_SIZE (SIGNY_SIG_SIZE / 3 + (SIGNY_SIG_SIZE % 3 != 0)) * 4 + 1
+// Size is equivalent to length of base64 unpadded URL encoding of signature
+// with a null terminator.
+#define SIGNY_SIG_B64_SIZE (SIGNY_SIG_SIZE * 4 + 2) / 3 + 1
 
 static psa_key_id_t signy_key;
 static uint8_t b64_cert[CONFIG_SIGNY_MAX_CERT_SIZE];
@@ -58,7 +61,7 @@ int signy_init(psa_key_id_t priv, const uint8_t *cert, size_t cert_len)
 
     psa_reset_key_attributes(&attributes);
 
-    int ret = base64_encode(b64_cert, sizeof(b64_cert), &b64_cert_len, cert, cert_len);
+    int ret = base64_url_encode_raw(b64_cert, sizeof(b64_cert), &b64_cert_len, cert, cert_len);
     if (ret != 0)
     {
         LOG_ERR("Failed to base64 encode certificate: %d", ret);
@@ -136,7 +139,7 @@ int signy_sign_url(const char *url,
     }
 
     /* Encode signature as base64 */
-    ret = base64_encode(sig_b64_buf, sizeof(sig_b64_buf), &sig_b64_len, sig, sig_len);
+    ret = base64_url_encode_raw(sig_b64_buf, sizeof(sig_b64_buf), &sig_b64_len, sig, sig_len);
     if (ret != 0)
     {
         LOG_INF("Failed encoding signature as base64: %d", ret);

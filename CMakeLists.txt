@@ -12,6 +12,7 @@ zephyr_library()
 
 zephyr_library_sources(
     # SDK
+    src/base64.c
     src/signy.c
 )
 
