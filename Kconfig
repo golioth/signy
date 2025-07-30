@@ -1,0 +1,36 @@
+# Copyright (c) 2025 Golioth, Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig SIGNY
+  bool "Tiny URL Signing"
+  select PSA_WANT_ALG_ECDSA
+  select PSA_WANT_ECC_SECP_R1_256
+  select PSA_WANT_ALG_SHA_256
+  select BASE64
+  select POSIX_TIMERS
+  help
+    signy is a library for signing URLs on small devices.
+
+if SIGNY
+
+config SIGNY_URL_VALIDITY_DURATION
+  int "Duration for which the signed URL will be valid, in seconds"
+  default 90
+  help
+    Duration, in seconds, for which the signed URL will be valid. It is
+    recommended to keep this duration as short as possible.
+
+config SIGNY_MAX_CERT_SIZE
+  int "Maximum size of base64 encoded certificate"
+  default 512
+  help
+    Maximum size of base64 encoded certificate.
+
+config SIGNY_MAX_URL_SIZE
+  int "Maximum size of URL before signing"
+  default 1024
+  help
+    Maximum size of URL before signing.
+
+endif
