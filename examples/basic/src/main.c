@@ -18,7 +18,7 @@ static char signed_url[CONFIG_EXAMPLE_SIGNED_URL_MAX_SIZE];
 
 #define CERT_DIR "/lfs1/credentials"
 #define CERT_FILE CERT_DIR "/crt.der"
-#define KEY_FILE CERT_DIR "/key.der"
+#define KEY_FILE CERT_DIR "/key.bin"
 
 static void ensure_credentials_dir(void)
 {

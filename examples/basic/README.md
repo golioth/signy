@@ -53,26 +53,23 @@ mcumgr --conntype serial --connstring /dev/ttyACM0 fs upload device.crt.der /lfs
 smpmgr --port /dev/ttyACM0 --mtu 128 file upload device.crt.der /lfs1/credentials/crt.der
 ```
 
-Convert device private key to `device_key.inc` in the [format
+Extract the device private key to `device.key.bin` in the [format
 expected](https://datatracker.ietf.org/doc/html/rfc5915.html) by
 `psa_import_key()` for a [Weierstrass Elliptic curve key
 pair](https://arm-software.github.io/psa-api/crypto/1.1/api/keys/management.html#key-formats).
-
-
-```
-tail -c +8 device.key.der | head -c +32 > device.key.psa.der
-```
+How the private key is extracted will depend on how the key was generated, but
+the the result should always be 32 bytes.
 
 Load the device private key.
 
 ```
-mcumgr --conntype serial --connstring /dev/ttyACM0 fs upload device.key.psa.der /lfs1/credentials/key.der
+mcumgr --conntype serial --connstring /dev/ttyACM0 fs upload device.key.bin /lfs1/credentials/key.bin
 ```
 
 **or**
 
 ```
-smpmgr --port /dev/ttyACM0 --mtu 128 file upload device.key.psa.der /lfs1/credentials/key.der
+smpmgr --port /dev/ttyACM0 --mtu 128 file upload device.key.bin /lfs1/credentials/key.bin
 ```
 
 After configuring credentials, reboot the device to initialize `signy` with them.
