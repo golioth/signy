@@ -14,7 +14,7 @@
 
 LOG_MODULE_REGISTER(signy_basic, LOG_LEVEL_DBG);
 
-static char signed_url[CONFIG_SIGNED_URL_MAX_SIZE];
+static char signed_url[CONFIG_EXAMPLE_SIGNED_URL_MAX_SIZE];
 
 #define CERT_DIR "/lfs1/credentials"
 #define CERT_FILE CERT_DIR "/crt.der"
