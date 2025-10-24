@@ -107,7 +107,8 @@ int signy_sign_url(const char *url,
     }
 
     /* Compute the SHA256 hash of the URL */
-    status = psa_hash_compute(PSA_ALG_SHA_256, url_buf, ret, hash, sizeof(hash), &hash_len);
+    status =
+        psa_hash_compute(PSA_ALG_SHA_256, (uint8_t *) url_buf, ret, hash, sizeof(hash), &hash_len);
     if (status != PSA_SUCCESS)
     {
         return -EINVAL;
@@ -128,7 +129,11 @@ int signy_sign_url(const char *url,
     }
 
     /* Encode signature as base64 */
-    ret = base64_url_encode_raw(sig_b64_buf, sizeof(sig_b64_buf), &sig_b64_len, sig, sig_len);
+    ret = base64_url_encode_raw((uint8_t *) sig_b64_buf,
+                                sizeof(sig_b64_buf),
+                                &sig_b64_len,
+                                sig,
+                                sig_len);
     if (ret != 0)
     {
         err = -ENOMEM;
