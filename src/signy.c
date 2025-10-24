@@ -5,14 +5,12 @@
  */
 
 #include <string.h>
-#include <zephyr/kernel.h>
-#include <zephyr/posix/time.h>
-#include <zephyr/logging/log.h>
+#include <stdio.h>
+#include <time.h>
+#include <errno.h>
 #include <psa/crypto.h>
 
 #include "base64.h"
-
-LOG_MODULE_REGISTER(signy, LOG_LEVEL_DBG);
 
 #define SIGNY_URL_FMT "%.*s?nb=%lld&na=%lld&cert=%.*s"
 #define SIGNY_SIGNED_URL_FMT "%s&sig=%.*s"
@@ -37,25 +35,21 @@ int signy_init(psa_key_id_t priv, const uint8_t *cert, size_t cert_len)
     status = psa_get_key_attributes(priv, &attributes);
     if (status != PSA_SUCCESS)
     {
-        LOG_ERR("Failed to get key attributes: %d", status);
         return -EINVAL;
     }
 
     if (psa_get_key_type(&attributes) != PSA_KEY_TYPE_ECC_KEY_PAIR(PSA_ECC_FAMILY_SECP_R1))
     {
-        LOG_ERR("Wrong key type provided");
         return -EINVAL;
     }
 
     if (psa_get_key_bits(&attributes) != SIGNY_KEY_BITS)
     {
-        LOG_ERR("Wrong key bits provided");
         return -EINVAL;
     }
 
     if (psa_get_key_algorithm(&attributes) != PSA_ALG_ECDSA(PSA_ALG_SHA_256))
     {
-        LOG_ERR("Wrong key algorithm provided");
         return -EINVAL;
     }
 
@@ -64,7 +58,6 @@ int signy_init(psa_key_id_t priv, const uint8_t *cert, size_t cert_len)
     int ret = base64_url_encode_raw(b64_cert, sizeof(b64_cert), &b64_cert_len, cert, cert_len);
     if (ret != 0)
     {
-        LOG_ERR("Failed to base64 encode certificate: %d", ret);
         return -EINVAL;
     }
 
@@ -95,7 +88,6 @@ int signy_sign_url(const char *url,
     ret = clock_gettime(CLOCK_REALTIME, &ts);
     if (ret != 0)
     {
-        LOG_ERR("Failed getting current time: %d", ret);
         return -EINVAL;
     }
 
@@ -111,7 +103,6 @@ int signy_sign_url(const char *url,
                    b64_cert);
     if (ret < 0 || ret >= sizeof(url_buf))
     {
-        LOG_ERR("Failed formatting URL for signing: %d", ret);
         return -ENOMEM;
     }
 
@@ -119,7 +110,6 @@ int signy_sign_url(const char *url,
     status = psa_hash_compute(PSA_ALG_SHA_256, url_buf, ret, hash, sizeof(hash), &hash_len);
     if (status != PSA_SUCCESS)
     {
-        LOG_ERR("Failed computing hash: %d", status);
         return -EINVAL;
     }
 
@@ -133,7 +123,6 @@ int signy_sign_url(const char *url,
                            &sig_len);
     if (status != PSA_SUCCESS)
     {
-        LOG_ERR("Failed signing: %d", status);
         err = -EINVAL;
         goto cleanup;
     }
@@ -142,7 +131,6 @@ int signy_sign_url(const char *url,
     ret = base64_url_encode_raw(sig_b64_buf, sizeof(sig_b64_buf), &sig_b64_len, sig, sig_len);
     if (ret != 0)
     {
-        LOG_INF("Failed encoding signature as base64: %d", ret);
         err = -ENOMEM;
         goto cleanup;
     }
@@ -156,7 +144,6 @@ int signy_sign_url(const char *url,
                    sig_b64_buf);
     if (ret < 0 || ret >= signed_url_len)
     {
-        LOG_ERR("Failed to construct signed URL: %d", ret);
         err = -ENOMEM;
         goto cleanup;
     }
