@@ -9,6 +9,7 @@ menuconfig SIGNY
   select PSA_WANT_ALG_SHA_256
   select BASE64
   select POSIX_TIMERS
+  select POSIX_API
   help
     signy is a library for signing URLs on small devices.
 
