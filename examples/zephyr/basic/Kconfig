@@ -4,7 +4,7 @@
 
 source "Kconfig.zephyr"
 
-config EXAMPLE_SIGNED_URL_MAX_SIZE
+config SIGNY_EXAMPLE_SIGNED_URL_MAX_SIZE
   int "Max size for signed URL"
   default 1024
   help
