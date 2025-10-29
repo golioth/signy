@@ -1,0 +1,21 @@
+# Copyright (c) 2025 Golioth, Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+config SIGNY_EXAMPLE_SIGNED_URL_MAX_SIZE
+  int "Max size for signed URL"
+  default 1024
+  help
+    Maximum size for signed URL.
+
+config SIGNY_EXAMPLE_BASE_URL
+  string "Base URL to be signed"
+  default "https://gw.golioth.io/.u/c/main@1.0.0"
+  help
+    Base URL to be signed using signy.
+
+config SIGNY_EXAMPLE_CURRENT_UNIX_TIMESTAMP
+  int "Current Unix timestamp"
+  default 0
+  help
+    Timestamp used to set the current time at boot.
