@@ -21,18 +21,6 @@ project](https://docs.golioth.io/connectivity/credentials/pki#integrating-with-g
 
 ## Usage
 
-The `signy` repository is a [Zephyr
-module](https://docs.zephyrproject.org/latest/develop/modules.html) and can be
-included in any Zephyr project by adding the following to the project's
-`west.yml` file.
-
-```yaml
-- name: signy
-  path: modules/lib/signy
-  revision: main
-  url: https://github.com/golioth/signy.git
-```
-
 `signy` leverages the [Platform Security Architecture (PSA) Crypto
 API](https://arm-software.github.io/psa-api/crypto/) for signing operations.
 Private keys must be
@@ -57,5 +45,34 @@ BASEURL?nb=NOTBEFORE&na=NOTAFTER&cert=CERTIFICATE&sig=SIGNATURE
 - `SIGNATURE`: the signature over the entire portion of the URL preceding
   `&sig=`.
 
-For more information on how to use `signy`, see the [examples](./examples)
-directory.
+### Zephyr
+
+The `signy` repository is a [Zephyr
+module](https://docs.zephyrproject.org/latest/develop/modules.html) and can be
+included in any Zephyr project by adding the following to the project's
+`west.yml` file.
+
+```yaml
+- name: signy
+  path: modules/lib/signy
+  revision: main
+  url: https://github.com/golioth/signy.git
+```
+
+See the Zephyr [examples](./examples/zephyr/) for more information.
+
+### ESP-IDF
+
+The `signy` repository is an [ESP-IDF
+component](https://docs.espressif.com/projects/idf-component-manager/en/latest/guides/packaging_components.html)
+and can be included in any ESP-IDF project by specifying it as a dependency in
+the project's `idf_component.yml`.
+
+```yaml
+dependencies:
+  signy:
+    path: components/signy
+    git: https://github.com/golioth/signy/esp-idf/signy
+```
+
+See the `esp-idf` [examples](./examples/esp-idf/) for more information.
