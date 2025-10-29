@@ -1,0 +1,9 @@
+# Copyright (C) 2025 Golioth, Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+menu "Signy Configuration"
+
+rsource '../../Kconfig'
+
+endmenu

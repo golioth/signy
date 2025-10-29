@@ -1,0 +1,9 @@
+# Copyright (C) 2025 Golioth, Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+version: "0.1.0"
+description: Signed URLs for Embedded Devices
+url: https://github.com/golioth/signy/tree/main/esp-idf/signy
+dependencies:
+  idf: ">=5"
