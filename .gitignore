@@ -4,3 +4,6 @@ build/
 .vscode
 twister-out*/
 *.inc
+sdkconfig
+sdkconfig.old
+dependencies.lock
