@@ -31,8 +31,8 @@ a secure location on a device, and certificates should be issued using [Public
 Key Infrastructure (PKI)](https://docs.golioth.io/connectivity/credentials/pki).
 
 For demonstration purposes, keys and certificates can be generated locally, then
-included in the firmware build. `signy` requires the use of a `secp256r1`
-elliptic curve key pair. If using `signy` with Golioth, see the [relevant
+loaded onto the device. `signy` requires the use of a `secp256r1` elliptic curve
+key pair. If using `signy` with Golioth, see the [relevant
 documentation](https://docs.golioth.io/connectivity/credentials/pki#establishing-pki)
 for establishing a Certificate Authority (CA) and issuing device certificates.
 
