@@ -11,7 +11,7 @@
 #include <psa/crypto.h>
 #include <signy/signy.h>
 
-#include "device_key_der.inc"
+#include "device_key_bin.inc"
 #include "device_cert_der.inc"
 
 static const char *TAG = "signy_basic";
