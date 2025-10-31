@@ -39,8 +39,13 @@ pair](https://arm-software.github.io/psa-api/crypto/1.1/api/keys/management.html
 How the private key is extracted will depend on how the key was generated, but
 the the result should always be 32 bytes.
 
+> [!NOTE]
+> The following command works for private keys generated using `openssl ecparam
+> -name prime256v1 -genkey`, but may not be suitable for all DER-encoded private
+> keys.
+
 ```
-xxd -i device.key.bin > src/device_key_bin.inc
+xxd -i -s 7 -l 32 device.key.der > src/device_key_bin.inc
 ```
 
 ### Configuring Time
