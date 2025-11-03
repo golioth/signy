@@ -1,0 +1,15 @@
+# Copyright (c) 2025 Golioth, Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+rsource '../../Kconfig'
+
+config SIGNY_EXAMPLE_WIFI_SSID
+  string "SSID for Wi-Fi network"
+  help
+    SSID for Wi-Fi network.
+
+config SIGNY_EXAMPLE_WIFI_PASSWORD
+  string "Password for Wi-Fi network"
+  help
+    Password for Wi-Fi network.
