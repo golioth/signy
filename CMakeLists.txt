@@ -2,21 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-if(NOT CONFIG_SIGNY)
-    return()
+if(ESP_PLATFORM)
+  include (${COMPONENT_DIR}/esp-idf/signy/CMakeLists.txt)
+  return()
 endif()
-
-zephyr_include_directories(include)
-
-zephyr_library()
-
-zephyr_library_sources(
-    # SDK
-    src/base64.c
-    src/signy.c
-)
-
-zephyr_library_link_libraries_ifdef(CONFIG_MBEDTLS mbedTLS)
-zephyr_library_include_directories_ifdef(CONFIG_BUILD_WITH_TFM
-    $<TARGET_PROPERTY:tfm,TFM_BINARY_DIR>/api_ns/interface/include
-)

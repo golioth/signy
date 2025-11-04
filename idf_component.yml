@@ -4,6 +4,6 @@
 
 version: "0.1.0"
 description: Signed URLs for Embedded Devices
-url: https://github.com/golioth/signy/tree/main/esp-idf/signy
+url: https://github.com/golioth/signy
 dependencies:
   idf: ">=5"

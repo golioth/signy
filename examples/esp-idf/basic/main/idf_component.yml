@@ -4,5 +4,4 @@
 
 dependencies:
   signy:
-    version: "0.1.0"
-    path: ../../../../esp-idf/signy
+    path: ../../../../
