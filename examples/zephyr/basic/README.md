@@ -105,7 +105,7 @@ example, if using `signy` with Golioth, a signed URL can be generated for the
 `main@1.0.0` OTA artifact in your project using the following command.
 
 ```
-signy sign https://gw.golioth.io/.u/c/main@1.0.0
+signy sign https://gw.golioth.io/.u/c/signy@1.0.0
 ```
 
 The generated signed URL will be valid for the duration specified in
