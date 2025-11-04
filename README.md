@@ -71,8 +71,7 @@ the project's `idf_component.yml`.
 ```yaml
 dependencies:
   signy:
-    path: components/signy
-    git: https://github.com/golioth/signy/esp-idf/signy
+    git: https://github.com/golioth/signy.git
 ```
 
 See the `esp-idf` [examples](./examples/esp-idf/) for more information.
