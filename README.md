@@ -55,7 +55,7 @@ included in any Zephyr project by adding the following to the project's
 ```yaml
 - name: signy
   path: modules/lib/signy
-  revision: main
+  revision: v0.2.0
   url: https://github.com/golioth/signy.git
 ```
 
@@ -71,6 +71,7 @@ the project's `idf_component.yml`.
 ```yaml
 dependencies:
   signy:
+    version: v0.2.0
     git: https://github.com/golioth/signy.git
 ```
 
