@@ -10,7 +10,7 @@ config SIGNY_EXAMPLE_SIGNED_URL_MAX_SIZE
 
 config SIGNY_EXAMPLE_BASE_URL
   string "Base URL to be signed"
-  default "https://gw.golioth.io/.u/c/main@1.0.0"
+  default "https://gw.golioth.io/.u/c/signy@1.0.0"
   help
     Base URL to be signed using signy.
 
